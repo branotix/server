@@ -13,18 +13,27 @@ type user struct {
 }
 
 var pulock user = user{
-	Name:       "Pulock kumar",
+	Name:       "Pulock Kumar",
 	Satus:      true,
 	SecreteKey: "eXchange@@11",
 }
 
 func userHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(pulock)
+	jsondata, _ := json.Marshal(pulock)
+	fmt.Fprintf(w, "%s", string(jsondata))
 
 }
 func main() {
+
+	fmt.Println(pulock)
+	jsondata, _ := json.Marshal(pulock)
+	fmt.Println("this is json data ", string(jsondata))
+
 	http.HandleFunc("/user", userHandler)
 	fmt.Println("server is listining localhost:8080/user")
 	http.ListenAndServe(":8080", nil)
 }
+
+
+avobe this idea it my idea then i have been implement follow the 
+standard rule
